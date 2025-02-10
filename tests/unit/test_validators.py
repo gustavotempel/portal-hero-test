@@ -1,4 +1,4 @@
-from utils.validators import validate_product
+from app.utils.validators import validate_product
 
 def test_validate_product():
     row = {"product_id": "1", "title": "Producto A", "price": "9.99", "store_id": "2"}

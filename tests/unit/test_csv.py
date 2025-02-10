@@ -1,6 +1,6 @@
 import pytest
 import os
-from services.parser import process_csv
+from app.services.parser import process_csv
 
 TEST_CSV_FILE = "test_process.csv"
 

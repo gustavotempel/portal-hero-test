@@ -1,7 +1,8 @@
-from utils.file_reader import read_csv
-from utils.validators import validate_product
-from models.product import Product
-from core.logger import logger
+from app.core.logger import logger
+from app.models.product import Product
+from app.utils.file_reader import read_csv
+from app.utils.validators import validate_product
+
 
 def process_csv(file_path):
     rows = read_csv(file_path)

@@ -1,4 +1,5 @@
-from core.logger import logger
+from app.core.logger import logger
+
 
 def validate_product(row):
     try:

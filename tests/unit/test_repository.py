@@ -1,5 +1,5 @@
-from models.product import Product
-from services.repository import insert_or_update_product, get_all_products
+from app.models.product import Product
+from app.services.repository import insert_or_update_product, get_all_products
 
 
 def test_insert_or_update_product(db_session):

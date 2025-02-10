@@ -1,7 +1,8 @@
-from core.logger import logger
-from services.parser import process_csv
-from services.repository import insert_or_update_product, delete_missing_products
 from sqlalchemy.orm import Session
+
+from app.core.logger import logger
+from app.services.parser import process_csv
+from app.services.repository import insert_or_update_product, delete_missing_products
 
 
 def sync_products(db: Session, file_path):

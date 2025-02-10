@@ -1,4 +1,4 @@
-from models.product import Product
+from app.models.product import Product
 
 def test_product_model():
     product = Product(id=1, title='Test Product', price=10.0, store_id=1)

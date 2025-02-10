@@ -1,6 +1,6 @@
 import csv, pytest, tempfile
-from models.product import Product
-from services.sync import sync_products
+from app.models.product import Product
+from app.services.sync import sync_products
 
 @pytest.fixture
 def sample_csv():

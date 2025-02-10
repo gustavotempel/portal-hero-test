@@ -1,8 +1,10 @@
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from models.product import Product
-from core.logger import logger
 from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+
+from app.core.logger import logger
+from app.models.product import Product
+
 
 def insert_or_update_product(db: Session, product):
     stmt = insert(Product).values(
