@@ -3,11 +3,11 @@ import shutil
 from fastapi import APIRouter, Depends, UploadFile, File
 from sqlalchemy.orm import Session
 
-from core.database import get_db
-from core.logger import logger
-from services.parser import process_csv
-from services.repository import insert_or_update_product, get_all_products
-from services.sync import sync_products
+from app.core.database import get_db
+from app.core.logger import logger
+from app.services.parser import process_csv
+from app.services.repository import insert_or_update_product, get_all_products
+from app.services.sync import sync_products
 
 
 router = APIRouter()

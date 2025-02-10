@@ -11,5 +11,10 @@ def sync_products(db: Session, file_path):
     for product in new_products:
         insert_or_update_product(db, product)
         existing_ids.add(product.id)
-    delete_missing_products(db, existing_ids)
+    try:
+        delete_missing_products(db, existing_ids)
+    except Exception as e:
+        logger.error(f"Error al eliminar producto: {e}")
+        db.rollback()
+        raise
     logger.info("Sincronización completada.")

@@ -7,6 +7,7 @@ from app.models.product import Product
 
 
 def insert_or_update_product(db: Session, product):
+    existing_product = db.query(Product).filter(Product.id == product.id).first()
     stmt = insert(Product).values(
         id=product.id,
         title=product.title,
@@ -19,16 +20,23 @@ def insert_or_update_product(db: Session, product):
     try:
         db.execute(stmt)
         db.commit()
-        logger.info(f"Producto {product.id} insertado o actualizado.")
+        if existing_product:
+            logger.info(f"Producto {product.id} actualizado.")
+        else:
+            logger.info(f"Producto {product.id} insertado.")
     except IntegrityError:
         db.rollback()
         logger.error(f"Error al insertar/actualizar producto {product.id}.")
 
 
 def delete_missing_products(db: Session, existing_ids):
-    deleted = db.query(Product).filter(Product.id.not_in(existing_ids)).delete(synchronize_session=False)
-    db.commit()
-    logger.info(f"{deleted} productos eliminados que no estaban en el portal CSV.")
+    all_products = db.query(Product).all()
+    products_to_delete = [p.id for p in all_products if p.id not in existing_ids]
+    if products_to_delete:
+        db.query(Product).filter(Product.id.in_(products_to_delete)).delete(synchronize_session=False)
+        db.commit()
+        for product_id in products_to_delete:
+            logger.info(f"Producto {product_id} eliminado.")
 
 
 def get_all_products(db: Session):
